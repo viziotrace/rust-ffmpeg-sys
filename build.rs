@@ -348,6 +348,11 @@ fn build() -> io::Result<()> {
     enable!(configure, "BUILD_LIB_AVS", "libavs");
     enable!(configure, "BUILD_LIB_XVID", "libxvid");
 
+    // hardware acceleration
+    enable!(configure, "BUILD_VIDEOTOOLBOX", "videotoolbox");
+    enable!(configure, "BUILD_NVDEC", "nvdec");
+    enable!(configure, "BUILD_VULKAN", "vulkan");
+
     // other external libraries
     enable!(configure, "BUILD_LIB_DRM", "libdrm");
     enable!(configure, "BUILD_NVENC", "nvenc");
