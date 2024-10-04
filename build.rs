@@ -351,6 +351,8 @@ fn build() -> io::Result<()> {
     // hardware acceleration
     enable!(configure, "BUILD_VIDEOTOOLBOX", "videotoolbox");
     enable!(configure, "BUILD_NVDEC", "nvdec");
+    // This is an additional flag to enable NVDEC support
+    enable!(configure, "BUILD_NVDEC", "ffnvcodec");
     enable!(configure, "BUILD_VULKAN", "vulkan");
 
     // other external libraries
