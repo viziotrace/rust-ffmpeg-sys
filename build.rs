@@ -201,7 +201,10 @@ fn build() -> io::Result<()> {
     // Command's path is not relative to command's current_dir
     let configure_path = source_dir.join("configure");
     assert!(configure_path.exists());
-    let mut configure = Command::new(&configure_path);
+
+    // Use shell to run configure this is required for windows.
+    let mut configure = Command::new("sh");
+    configure.arg(&configure_path);
     configure.current_dir(&source_dir);
 
     configure.arg(format!("--prefix={}", search().to_string_lossy()));
@@ -248,7 +251,10 @@ fn build() -> io::Result<()> {
     // make it static
     configure.arg("--enable-static");
     configure.arg("--disable-shared");
-    configure.arg("--enable-pthreads");
+
+    if cfg!(not(target_os = "windows")) {
+        configure.arg("--enable-pthreads");
+    }
 
     configure.arg("--enable-pic");
 
@@ -353,7 +359,7 @@ fn build() -> io::Result<()> {
     enable!(configure, "BUILD_NVDEC", "nvdec");
     // This is an additional flag to enable NVDEC support
     enable!(configure, "BUILD_NVDEC", "ffnvcodec");
-    enable!(configure, "BUILD_VULKAN", "vulkan");
+    enable!(configure, "BUILD_D3D12VA", "d3d12va");
 
     // other external libraries
     enable!(configure, "BUILD_LIB_DRM", "libdrm");
@@ -369,7 +375,7 @@ fn build() -> io::Result<()> {
     // run ./configure
     let output = configure
         .output()
-        .unwrap_or_else(|_| panic!("{:?} failed", configure));
+        .unwrap_or_else(|err| panic!("{:?} failed: {}", configure, err));
     if !output.status.success() {
         println!("configure: {}", String::from_utf8_lossy(&output.stdout));
 

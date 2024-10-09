@@ -29,12 +29,12 @@ vcpkg = "0.2"
 
 [features]
 default = [
-    "avcodec",
-    "avdevice",
-    "avfilter",
-    "avformat",
-    "swresample",
-    "swscale",
+  "avcodec",
+  "avdevice",
+  "avfilter",
+  "avformat",
+  "swresample",
+  "swscale",
 ]
 
 static = []
@@ -43,7 +43,7 @@ build = ["static"]
 # hardware acceleration
 build-videotoolbox = ["build"]
 build-nvdec = ["build"]
-build-vulkan = ["build"]
+build-d3d12va = ["build"]
 
 # mark enums in generated bindings as #[non_exhaustive]
 non-exhaustive-enums = []
