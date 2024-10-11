@@ -115,13 +115,16 @@ jobs:
             mingw-w64-x86_64-yasm
             mingw-w64-x86_64-pkg-config
             mingw-w64-x86_64-rust
-            mingw-w64-x86_64-git
       - name: Set up Rust
         uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
           override: true
           components: rustfmt, clippy
+
+      - name: Install Git
+        run: |
+          pacman -S --noconfirm git
 
       - name: Test shell
         run: |
