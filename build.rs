@@ -252,7 +252,9 @@ fn build() -> io::Result<()> {
     configure.arg("--enable-static");
     configure.arg("--disable-shared");
 
-    configure.arg("--enable-pthreads");
+    if !cfg!(target_os = "windows") {
+        configure.arg("--enable-pthreads");
+    }
 
     configure.arg("--enable-pic");
 
