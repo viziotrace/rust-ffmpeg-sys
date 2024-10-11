@@ -252,7 +252,7 @@ fn build() -> io::Result<()> {
     configure.arg("--enable-static");
     configure.arg("--disable-shared");
 
-    if cfg!(not(target_os = "windows")) {
+    if !cfg!(target_os = "windows") {
         configure.arg("--enable-pthreads");
     }
 
