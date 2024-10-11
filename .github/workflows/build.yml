@@ -125,6 +125,7 @@ jobs:
       - name: Install Git
         run: |
           pacman -S --noconfirm git
+          pacman -S --noconfirm make
 
       - name: Test shell
         run: |
