@@ -120,6 +120,11 @@ jobs:
           toolchain: stable
           override: true
           components: rustfmt, clippy
+
+      - name: Test shell
+        run: |
+          echo $MSYSTEM
+
       - name: Build
         run: |
           cargo build --features $FEATURES
