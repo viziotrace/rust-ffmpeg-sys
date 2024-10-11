@@ -114,6 +114,9 @@ jobs:
             mingw-w64-x86_64-nasm
             mingw-w64-x86_64-yasm
             mingw-w64-x86_64-pkg-config
+      - name: Install yasm
+        run: |
+          pacman -S --noconfirm yasm
       - name: Set up Rust
         uses: actions-rs/toolchain@v1
         with:
