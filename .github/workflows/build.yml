@@ -129,6 +129,9 @@ jobs:
       - name: Test shell
         run: |
           echo $MSYSTEM
+          which sh 
+          which make
+          which git
 
       - name: Build
         run: |
